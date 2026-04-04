@@ -44,7 +44,7 @@
     - state: bluespace_lifeline
       shader: unshaded
   - type: SpawnOnDespawn
-    prototype: AnomalyCoreBluespace
+    prototype: AnomalyCoreBluespaceExploding # mango edit
   - type: EmitSoundOnSpawn
     sound:
       path: /Audio/_Goobstation/Weapons/ChronoLegionnaire/stasisgun_reload.ogg

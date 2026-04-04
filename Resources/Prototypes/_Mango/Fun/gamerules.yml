@@ -27,3 +27,9 @@
   id: HeartRipFunRule
   components:
   - type: HeartRipFunRule
+
+- type: entity
+  parent: BaseGameRule
+  id: BsoLifelineExplode
+  components:
+  - type: BsoLifelineExplodeFunRule
