@@ -4,6 +4,7 @@ using Content.Inky.Common.Concussion;
 using Content.Inky.Shared.Concussion;
 using Content.Server.Ghost;
 using Content.Server.Speech.Components;
+using Content.Shared.Alert;
 using Content.Shared.Damage.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Explosion;
@@ -31,9 +32,9 @@ public sealed class ConcussionSystem : SharedConcussionSystem
     [Dependency] private readonly CommonLanguageSystem _theTowerOfBabel = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
 
-    private static readonly SoundSpecifier ConcussionSound =
-        new SoundPathSpecifier("/Audio/_Inky/Ambient/highpitch.ogg");
+    private ProtoId<AlertPrototype> _alert = "Concussion";
 
     public override void Initialize()
     {
@@ -48,6 +49,9 @@ public sealed class ConcussionSystem : SharedConcussionSystem
         SubscribeLocalEvent<ConcussionThresholdComponent, GhostAttemptHandleEvent>(OnGhostAttempt);
         SubscribeLocalEvent<ConcussionThresholdComponent, GetFlashbangedEvent>(OnFlashbanged);
         SubscribeLocalEvent<ConcussionThresholdComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
+
+        SubscribeLocalEvent<ConcussedComponent, ComponentInit>(OnConcussed);
+        SubscribeLocalEvent<ConcussedComponent, ComponentShutdown>(OnDeConcussed);
     }
     #region logic
     private void OnMapInit(EntityUid uid, ConcussionThresholdComponent comp, MapInitEvent args)
@@ -133,4 +137,10 @@ public sealed class ConcussionSystem : SharedConcussionSystem
 
         args.ModifySpeed(speed, speed);
     }
+
+    private void OnConcussed(EntityUid uid, ConcussedComponent comp, ComponentInit args)
+        => _alertsSystem.ShowAlert(uid, _alert);
+
+    private void OnDeConcussed(EntityUid uid, ConcussedComponent comp, ComponentShutdown args)
+        => _alertsSystem.ClearAlert(uid, _alert);
 }
