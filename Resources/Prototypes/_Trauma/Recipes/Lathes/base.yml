@@ -11,4 +11,17 @@
   - green
   - blue
   # inky end
-  # same as cargo product, intentionally no epsilon
+
+- type: latheRecipe
+  abstract: true
+  id: BaseBlueAlert
+  requiredAlerts:
+  - blue
+  - red
+  - gamma
+  - delta
+  - omicron
+  - octarine
+  # inky start - kill chud lock
+  - green
+  # inky end

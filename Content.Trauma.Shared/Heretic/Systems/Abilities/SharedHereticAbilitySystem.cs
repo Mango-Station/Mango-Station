@@ -53,9 +53,10 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 public abstract partial class SharedHereticAbilitySystem : EntitySystem
 {
     [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly INetManager _net = default!;
 
+    [Dependency] protected readonly IPrototypeManager Proto = default!;
+    [Dependency] protected readonly ITileDefinitionManager Tile = default!;
     [Dependency] protected readonly IRobustRandom Random = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedDoAfterSystem DoAfter = default!;
@@ -93,7 +94,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
     [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
     [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+
     [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
     public static readonly DamageSpecifier AllDamage = new()
@@ -142,9 +143,12 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     private void OnBeforeTouchSpell(Entity<MindContainerComponent> ent, ref BeforeTouchSpellAbilityUsedEvent args)
     {
         if (!TryUseAbility(args.Args, false))
+        {
+            args.Cancelled = true;
             return;
+        }
 
-        if (!_proto.Index(args.Args.TouchSpell).HasComponent<MansusGraspComponent>())
+        if (!Proto.Index(args.Args.TouchSpell).HasComponent<MansusGraspComponent>())
             return;
 
         if (!Heretic.TryGetHereticComponent(ent.AsNullable(), out var heretic, out var mind))
@@ -159,7 +163,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             return ent.Comp.MansusGraspProto;
 
         var pathSpecific = ent.Comp.MansusGraspProto + ent.Comp.CurrentPath;
-        return _proto.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
+        return Proto.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
     }
 
     private void OnAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)

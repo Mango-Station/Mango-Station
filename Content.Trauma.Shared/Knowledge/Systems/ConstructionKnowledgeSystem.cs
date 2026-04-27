@@ -58,7 +58,7 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
                 {
                     var masteryName = _knowledge.GetMasteryString(mastery);
                     var name = _proto.Index(id).Name;
-                    _popup.PopupEntity("You are missing {masteryName} {name} to construct that!", ent, ent, PopupType.MediumCaution);
+                    _popup.PopupEntity($"You are missing {masteryName} {name} to construct that!", ent, ent, PopupType.MediumCaution);
                 }
                 args.Cancelled = true;
                 return;

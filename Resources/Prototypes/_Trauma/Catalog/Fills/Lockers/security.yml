@@ -38,7 +38,6 @@
   table: !type:AllSelector
     children:
     - id: ClothingHeadsetAltSecurityRegular
-    - id: PanicButton
     - id: PepperSpray
     - id: WeaponLaserSidearm
     - id: ClothingHandsGlovesSecurity
@@ -60,7 +59,7 @@
 - type: entity
   parent: BaseTraumaGunSafe
   id: GunSafeShotguns
-  name: shotgun safe
+  name: ballistics safe
   components:
   - type: EntityTableContainerFill
     containers:
@@ -163,6 +162,12 @@
       amount: 3
     - id: BoxBeanbag
       amount: 3
+    - id: WeaponGaussgun
+      amount: 2
+    - id: BaseMagazineGaussgun
+      amount: 2
+    - id: MagazineBoxGaussgunBullet
+      amount: 2
 
 - type: entityTable
   id: FillGunSafeLaserT2

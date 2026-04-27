@@ -9,33 +9,8 @@
 # Table: null
 
 # <Trauma> - too lazy to port debugoks multi migration thing
-
-# 2026-04-06 - inky migration - fix trauma upstream fail idk
-CrateVendingMachineRestockAutoDrobeFilled: null
-CrateVendingMachineRestockHappyHonkFilled: null
-CrateVendingMachineRestockDiscountDansFilled: null
-CrateVendingMachineRestockDonutFilled: null
-CrateVendingMachineRestockPTechFilled: null
-CrateVendingMachineRestockBoozeFilled: null
-LockerShaftMinerFilledHardsuit: null
-AiRemoteBrain: null
-CardDeckBlack: null
-CardBoxSyndicate: null
-MachineFTLDriveAutomated: null
-BSOManual: null
-HeadHuman: null
-LeftArmHuman: null
-LeftLegHuman: null
-RightArmHuman: null
-RightLegHuman: null
-HeadSkeleton: null
-ChestSkeleton: null
-RightArmSkeleton: null
-RightHandSkeleton: null
-TorsoSkeleton: null
-LeftLegSkeleton: null
-BioSynthHeart: null
-MedicalCyberneticEyes: null
+# 2026-3-2026
+ClosetMaintenanceFilledRandom: RandomMaintsCloset
 
 # 2026-01-07
 GunSafeDisabler: GunSafePhaser
@@ -77,9 +52,86 @@ ToiletEmpty: ToiletFilled
 MailTeleporter: CargoMailTeleporter
 MailMetricsCartridge: null
 ComputerShuttleSalvage: ComputerShuttleMiningLavaland # 2 maps had this for some reason...
+
+# 2026-01-19 Goob reference purge
+PlushieBingleYakub: null
+PosterContrabandGoobYakub: null
+PosterLegitGoobDurkPlush: null
+PosterLegitGoobLouieVote: null
+PlushieSamantha: null
+PlushieBoggle: null
+PlushieDurk: null
+PlushieBrizby: null
+PlushieBaldzby: null
+PlushieLouie: null
+PlushieJvne: null
+PlushieFern: null
+PlushieNigel: null
+PlushieLehmin: null
+
+# 2026-01-21 remove ftl drives
+MachineFTLDrive: null
+MachineFTLDriveHigh: null
+MachineFTLDriveAutomated: null
+MachineFTLDriveDebug: null
+MachineFTLDriveCircuitboard: null
+MachineFTLDriveHighCircuitboard: null
+
+# 2026-01-29 migrate away water vapor tanks because some chud mapped it
+DoubleEmergencyWaterVaporTankFilled: DoubleEmergencyOxygenTankFilled
+LockerShaftMinerFilledHardsuit: LockerSalvageSpecialistFilledHardsuit
+
+# 2026-02-12 renamed a bunch of organs
+BasicCyberneticEyes: OrganCyberneticEyes
+DiagnosticCyberneticEyes: OrganCyberneticEyesDiagnostic
+MedicalCyberneticEyes: OrganCyberneticEyesMedical
+SecurityCyberneticEyes: OrganCyberneticEyesSecurity
+BioSynthHeart: OrganBioSynthHeart
+ChestSkeleton: OrganSkeletonPersonTorso
+ChestHuman: OrganHumanTorso
+
+# 2026-02-18 removed vulp plushie
+PlushieVulp: null
+
+# 2026-03-02 removed playing cards
+CardDeckBlack: null
+CardDeckSyndicate: null
+CardDeckNanotrasen: null
+CardBoxBlack: null
+CardBoxSyndicate: null
+CardBoxNanotrasen: null
+
+# 2026-03-04
+RotaryPhoneStand: RotaryPhoneStandNoRot
+
+# 2026-03-10 this gives martial arts, no longer harmless maint loot
+MaterialHideBear: MaterialHideCorgi
+
+# 2026-03-12 this being roundstart is slop
+MedicalBiofabricator: null
+MedicalBiofabMachineBoard: null
+
+# 2026-03-13 necrosol was removed
+NecrosolChemistryBottle: ArcryoxChemistryBottle
+
+# 2026-03-28 blockers being mapped is anti fun
+DisposalBlocker: DisposalPipe
+
+# 2026-03-29 no chud boris
+AiRemoteBrain: null
+
+# 2026-04-12 kill brigmedic
+SpawnPointBrigmedic: null
+
+# 2026-04-13 kill chud signaller
+PanicButton: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
+
+# 2026-01-10 Goobstation Change Mapped Chem to Energy Chem by default
+ChemDispenser: EnergyChemDispenser
+
 AirlockBoxerGlassLocked: AirlockServiceGlassLocked
 AirlockClownGlassLocked: AirlockServiceGlassLocked
 AirlockClownLocked: AirlockServiceGlassLocked
@@ -158,7 +210,6 @@ GunSafeAdjutantShotgun: null
 GunSafeEnergyGunMini: null
 GunSafeVulcanRifle: null
 HatSpawner: null
-KitchenDeepFryer: null
 KvassTankFull: null
 LockerForensicMantisFilled: null
 LunchboxSecurityFilledRandom: null
@@ -830,9 +881,6 @@ MagazineBoxCaselessRifle10x24: null
 MagazineBoxCaselessRifleBig: null
 MagazinePistolHighCapacityRubber: null
 
-# 2025-03-09 - Shitmed Woundmed, separating torsos into chest and groin # inky edit - disabled, idk idc
-#TorsoHuman: ChestHuman
-#TorsoSkeleton: ChestSkeleton
 # 2025-03-18
 EpinephrineChemistryBottle: ChemistryBottleEpinephrine
 RobustHarvestChemistryBottle: ChemistryBottleRobustHarvest
@@ -1036,9 +1084,15 @@ ToySkeleton: ToyFigurineSkeleton
 # Trauma - 2025-10-19
 LockerBlueshieldOfficerFilled: null
 DresserBlueshieldOfficerFilled: null
+HolopadCommandBSO: null
 UniqueLockerBlueshieldOfficerFilled: null
 AirlockBlueshieldOfficerCommandLocked: AirlockCentralCommandLocked
 AirlockBlueshieldOfficerCommandGlassLocked: AirlockCentralCommandGlassLocked
+SpawnMobHumanBSOBase: null
+SpawnMobHumanBSOModSuit: null
+SpawnMobHumanBSOSuit: null
+SpawnPointBlueshieldOfficer: null
+BSOManual: DragonKungFuManual
 
 # 2025-10-28
 DrinkKiraSpecial: DrinkOrangeLimeSodaGlass
@@ -1071,3 +1125,62 @@ HandheldHealthAnalyzerEmpty: HandheldHealthAnalyzer
 
 #2026-01-09
 BorgModuleAdvancedChemical: BorgModuleAdvancedTopical
+
+# 2026-01-14
+HeadHuman: OrganHumanHead
+HeadSkeleton: OrganSkeletonPersonHead
+LeftArmHuman: OrganHumanArmLeft
+LeftArmSkeleton: OrganSkeletonPersonArmLeft
+LeftHandSkeleton: OrganSkeletonPersonHandLeft
+LeftLegHuman: OrganHumanLegLeft
+LeftLegSkeleton: OrganSkeletonPersonLegLeft
+RightArmHuman: OrganHumanArmRight
+RightHandSkeleton: OrganSkeletonPersonHandRight
+RightLegHuman: OrganHumanLegRight
+TorsoSkeleton: OrganSkeletonPersonTorso
+RightArmSkeleton: OrganSkeletonPersonArmRight
+
+# 2026-01-19
+#TowelColorOrange: null # Trauma - kept towels
+#TowelColorPurple: null
+#TowelColorRed: null
+#TowelColorBlue: null
+#TowelColorDarkBlue: null
+#TowelColorLightBlue: null
+#TowelColorTeal: null
+#TowelColorBrown: null
+#TowelColorLightBrown: null
+#TowelColorGray: null
+#TowelColorGreen: null
+#TowelColorDarkGreen: null
+#TowelColorGold: null
+#TowelColorOrange: null
+#TowelColorBlack: null
+#TowelColorPink: null
+#TowelColorYellow: null
+#TowelColorMaroon: null
+#TowelColorSilver: null
+#TowelColorMime: null
+
+# 2026-02-18
+# Replace cargo order crates which contain exactly one item with the item, parcel wrapped.
+CrateVendingMachineRestockBoozeFilled: VendingMachineRestockBooze
+CrateVendingMachineRestockChefvendFilled: VendingMachineRestockChefvend
+CrateVendingMachineRestockClothesFilled: VendingMachineRestockClothes
+CrateVendingMachineRestockAutoDrobeFilled: VendingMachineRestockCostumes
+CrateVendingMachineRestockCondimentStationFilled: VendingMachineRestockCondimentStation
+CrateVendingMachineRestockDinnerwareFilled: VendingMachineRestockDinnerware
+CrateVendingMachineRestockGamesFilled: VendingMachineRestockGames
+CrateVendingMachineRestockPTechFilled: VendingMachineRestockPTech
+#CrateVendingMachineRestockSalvageEquipmentFilled: VendingMachineRestockSalvageEquipment # Trauma - doesnt exist anymore
+CrateVendingMachineRestockVendomatFilled: VendingMachineRestockVendomat
+CrateVendingMachineRestockTankDispenserFilled: VendingMachineRestockTankDispenser
+# The crates below contained _two_ of the restock items, so these are technically not direct migrations. But eh.
+CrateVendingMachineRestockHotDrinksFilled: VendingMachineRestockHotDrinks
+CrateVendingMachineRestockRobustSoftdrinksFilled: VendingMachineRestockRobustSoftdrinks
+CrateVendingMachineRestockSmokesFilled: VendingMachineRestockSmokes
+CrateVendingMachineRestockHappyHonkFilled: VendingMachineRestockHappyHonk
+CrateVendingMachineRestockGetmoreChocolateCorpFilled: VendingMachineRestockGetmoreChocolateCorp
+CrateVendingMachineRestockChangFilled: VendingMachineRestockChang
+CrateVendingMachineRestockDiscountDansFilled: VendingMachineRestockDiscountDans
+CrateVendingMachineRestockDonutFilled: VendingMachineRestockDonut

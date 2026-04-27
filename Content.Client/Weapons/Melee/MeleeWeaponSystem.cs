@@ -43,14 +43,12 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-    private EntityQuery<TransformComponent> _xformQuery;
-
     private const string MeleeLungeKey = "melee-lunge";
 
     public override void Initialize()
     {
         base.Initialize();
-        _xformQuery = GetEntityQuery<TransformComponent>();
+
         SubscribeNetworkEvent<MeleeLungeEvent>(OnMeleeLunge);
         UpdatesOutsidePrediction = true;
     }
@@ -163,9 +161,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             // Helper func
             Vector2 GetDirection()
             {
-                if (!_xformQuery.TryGetComponent(entity, out var userXform))
-                    return Vector2.Zero;
-
+                var userXform = Transform(entity);
                 var targetMap = _transform.ToMapCoordinates(coordinates);
 
                 if (targetMap.MapId != userXform.MapID)
@@ -185,11 +181,16 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             ClientLightAttack(entity, mousePos, coordinates, weaponUid, weapon);
     }
 
-    public override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session) // Goob edit
+    public override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session, out EntityUid source) // Trauma - made public, added source
     {
         var xform = Transform(target);
         var targetCoordinates = xform.Coordinates;
         var targetLocalAngle = xform.LocalRotation;
+
+        // <Trauma>
+        if (RaiseInRangeEvent(user, target, range, targetCoordinates, targetLocalAngle, out var inRange, out source))
+            return inRange;
+        // </Trauma>
 
         return Interaction.InRangeUnobstructed(user, target, targetCoordinates, targetLocalAngle, range, overlapCheck: false);
     }
@@ -207,7 +208,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     private void ClientHeavyAttack(EntityUid user, EntityCoordinates coordinates, EntityUid meleeUid, MeleeWeaponComponent component)
     {
         // Only run on first prediction to avoid the potential raycast entities changing.
-        if (!_xformQuery.TryGetComponent(user, out var userXform) ||
+        if (!TryComp(user, out TransformComponent? userXform) ||
             !Timing.IsFirstTimePredicted)
         {
             return;
