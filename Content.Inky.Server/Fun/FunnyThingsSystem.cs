@@ -12,8 +12,6 @@ public sealed class FunnyThingsSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _gambling = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
 
-    private const string Rule = "FunGameruleChooser";
-
     public override void Initialize()
     {
         SubscribeLocalEvent<RoundStartAttemptEvent>(OnRoundStartAttempt);
@@ -23,8 +21,6 @@ public sealed class FunnyThingsSystem : EntitySystem
     {
         if (ev.Forced) // integration tests force round starts
             return;
-
-        _gameTicker.StartGameRule(Rule);
 
         var prob = _cfg.GetCVar(InkyCVars.FunProb);
 
