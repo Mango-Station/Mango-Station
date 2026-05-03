@@ -26,7 +26,7 @@ public sealed class FunnyThingsSystem : EntitySystem
 
         _gameTicker.StartGameRule(Rule);
 
-        var prob = _cfg.GetCVar(InkyCVars.FunProb) / 100f;
+        var prob = _cfg.GetCVar(InkyCVars.FunProb);
 
         var eqe = EntityQueryEnumerator<RoundstartGameruleChooserRuleComponent>();
         while (eqe.MoveNext(out var uid, out var chooser))
