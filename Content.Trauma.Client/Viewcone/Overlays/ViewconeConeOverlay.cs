@@ -11,10 +11,10 @@ namespace Content.Trauma.Client.Viewcone.Overlays;
 /// <summary>
 /// Renders the actual "cone" part of the viewcone, no alpha modulation
 /// </summary>
-public sealed class ViewconeConeOverlay : Overlay
+public sealed partial class ViewconeConeOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private readonly SharedTransformSystem _xform;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -28,6 +28,7 @@ public sealed class ViewconeConeOverlay : Overlay
     private float _coneFeather;
     private float _coneIgnoreRadius;
     private float _coneIgnoreFeather;
+    public float GrainScale = 1f;
 
     public ViewconeConeOverlay()
     {
@@ -82,10 +83,12 @@ public sealed class ViewconeConeOverlay : Overlay
         _viewconeShader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
         _viewconeShader.SetParameter("Zoom", zoom);
         _viewconeShader.SetParameter("ViewAngle", viewAngle);
-        _viewconeShader.SetParameter("ConeAngle", _coneAngle);
-        _viewconeShader.SetParameter("ConeFeather", _coneFeather);
+        _viewconeShader.SetParameter("ConeAngle", MathHelper.DegreesToRadians(_coneAngle));
+        _viewconeShader.SetParameter("ConeFeather", MathHelper.DegreesToRadians(_coneFeather));
         _viewconeShader.SetParameter("ConeIgnoreRadius", _coneIgnoreRadius);
         _viewconeShader.SetParameter("ConeIgnoreFeather", _coneIgnoreFeather);
+        _viewconeShader.SetParameter("GrainScale", GrainScale);
+        _viewconeShader.SetParameter("Offset", eye.Offset * EyeManager.PixelsPerMeter);
 
         worldHandle.UseShader(_viewconeShader);
         worldHandle.DrawRect(viewport, Color.White);
